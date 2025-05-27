@@ -70,9 +70,9 @@ public class Handler implements FtbQHandler {
             List<String> hover = image.hover;
             for (String hoverText : hover) {
                 HandlerCounter.addImageNum();
-                String key = prefix+".image.hovertext"+HandlerCounter.getImageNum();
+                String key =prefix+".image.hovertext"+HandlerCounter.getImageNum();
                 transKeys.put(key,addPercent(hoverText));
-                newHoverList.add(key);
+                newHoverList.add("{" + key + "}");
             }
             hover.clear();
             hover.addAll(newHoverList);

@@ -196,12 +196,12 @@ public class BackPortUtils implements FtbQHandler {
                 if (!hoverTextList.isEmpty()){
                     hoverTextList.forEach(hoverTextString ->{
                         if (hoverTextString.contains(".image.hovertext")){
-                            //String key = hoverTextString.replaceAll("[{}]", "");
+                            String key = hoverTextString.replaceAll("[{}]", "");
                             try {
-                                chapterImageHoverTextList.add(defaultJSON.get(hoverTextString).getAsString().replace("%%","%"));
+                                chapterImageHoverTextList.add(defaultJSON.get(key).getAsString().replace("%%","%"));
                             }catch (Exception e){
                                 try {
-                                    chapterImageHoverTextList.add(enJson.get(hoverTextString).getAsString().replace("%%","%"));
+                                    chapterImageHoverTextList.add(enJson.get(key).getAsString().replace("%%","%"));
                                 }catch (Exception e1){
                                     log.info("chapter ImageHoverText is not in kubejs!");
                                 }
