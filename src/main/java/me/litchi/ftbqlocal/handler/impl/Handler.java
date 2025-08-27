@@ -27,9 +27,9 @@ public class Handler implements FtbQHandler {
     public void handleRewardTables(List<RewardTable> rewardTables) {
         rewardTables.forEach(rewardTable -> {
             HandlerCounter.addCounter();
-            transKeys.put("ftbquests.loot_table_"+rewardTable.id+".title", addPercent(rewardTable.title));
+            transKeys.put("ftbquests.loot_table."+rewardTable.id+".title", addPercent(rewardTable.title));
 
-            rewardTable.title = ("{" + "ftbquests.loot_table_"+rewardTable.id+".title"+ "}");
+            rewardTable.title = ("{" + "ftbquests.loot_table."+rewardTable.id+".title"+ "}");
         });
         HandlerCounter.setCounter(0);
     }
@@ -38,8 +38,8 @@ public class Handler implements FtbQHandler {
     public void handleChapterGroup(ChapterGroup chapterGroup) {
         if(chapterGroup.getTitle() != null){
             if (!chapterGroup.title.isEmpty()){
-                transKeys.put("ftbquests.chapter_groups_"+chapterGroup.id+".title", addPercent(chapterGroup.title));
-                chapterGroup.title = "{" + "ftbquests.chapter_groups_"+chapterGroup.id+".title" + "}";
+                transKeys.put("ftbquests.chapter_groups."+chapterGroup.id+".title", addPercent(chapterGroup.title));
+                chapterGroup.title = "{" + "ftbquests.chapter_groups."+chapterGroup.id+".title" + "}";
                 HandlerCounter.addCounter();
             }
         }
@@ -84,7 +84,7 @@ public class Handler implements FtbQHandler {
     private void handleTasks(List<Task> tasks) {
         tasks.stream().filter(task -> !task.title.isEmpty()).forEach(task -> {
             HandlerCounter.addCounter();
-            String textKey = HandlerCounter.getPrefix() + ".task_"+task.id+".title";
+            String textKey = HandlerCounter.getPrefix() + ".task."+task.id+".title";
             transKeys.put(textKey, addPercent(task.title));
             task.title = "{"+textKey+"}";
         });
@@ -93,7 +93,7 @@ public class Handler implements FtbQHandler {
     private void handleRewards(List<Reward> rewards) {
         rewards.stream().filter(reward -> !reward.title.isEmpty()).forEach(reward -> {
             HandlerCounter.addCounter();
-            String textKey = HandlerCounter.getPrefix() + ".reward_"+reward.id+".title";
+            String textKey = HandlerCounter.getPrefix() + ".reward."+reward.id+".title";
             transKeys.put(textKey, addPercent(reward.title));
             reward.title = "{"+textKey+"}";
         });
@@ -104,7 +104,7 @@ public class Handler implements FtbQHandler {
     public void handleQuests(List<Quest> allQuests) {
         allQuests.forEach(quest ->{
             HandlerCounter.addQuests();
-            HandlerCounter.setPrefix("ftbquests.chapter." + quest.getChapter().getFilename() + ".quest" + HandlerCounter.getQuests());
+            HandlerCounter.setPrefix("ftbquests.chapter." + quest.getChapter().getFilename() + ".quest." + quest.id);
             String prefix = HandlerCounter.getPrefix();
             if(quest.getTitle() != null){
                 if (!quest.title.isEmpty()){
