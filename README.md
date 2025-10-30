@@ -9,6 +9,8 @@
 
 这是FTB-Quests-Localization（未实现）的 fork，一个 FTBQuest 本地化 Mod。
 
+Mod链接：[curefore](https://www.curseforge.com/minecraft/mc-mods/ftb-quest-localizer)
+
 # 如何使用
 
 在聊天栏中输入 /ftblang export <originalLangCode> 指令，如 /ftblang export en_us；
