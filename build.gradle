@@ -17,7 +17,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
-archivesBaseName = "ftbquestlocalizer-1.18.2-forge-3.2.2"
+archivesBaseName = "ftbquestlocalizer-1.18.2-forge-3.2.3"
 
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
