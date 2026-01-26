@@ -30,54 +30,57 @@ public class JSONService implements FtbQService {
                         jsonStringBuilder.append("\"color\":\"").append(color).append("\",");
                     }
                     if (style.isUnderlined()){
-                        jsonStringBuilder.append("\"underlined\":"+ 1).append(",");
+                        jsonStringBuilder.append("\"underlined\":true,");
                     }
                     if (style.isStrikethrough()){
-                        jsonStringBuilder.append("\"strikethrough\":"+ 1).append(",");
+                        jsonStringBuilder.append("\"strikethrough\":true,");
                     }
                     if (style.isBold()){
-                        jsonStringBuilder.append("\"bold\":"+ 1).append(",");
+                        jsonStringBuilder.append("\"bold\":true,");
                     }
                     if (style.isItalic()){
-                        jsonStringBuilder.append("\"italic\":"+ 1).append(",");
+                        jsonStringBuilder.append("\"italic\":true,");
                     }
                     if (style.isObfuscated()){
-                        jsonStringBuilder.append("\"obfuscated\":"+ 1).append(",");
+                        jsonStringBuilder.append("\"obfuscated\":true,");
                     }
                     String textKey = HandlerCounter.getPrefix() + ".rich_description" + HandlerCounter.getCounter();
                     HandlerCounter.transKeys.put(textKey, addPercent(text));
+                    jsonStringBuilder.append("\"translate\":\"").append(textKey).append("\"");
                     ClickEvent clickEvent = style.getClickEvent();
 
                     if(clickEvent != null){
-                        jsonStringBuilder.append("\"translate\":\"").append(textKey).append("\",");
                         String clickEventValue = clickEvent.getValue();
                         String clickEventAction = clickEvent.getAction().getName();
-                        jsonStringBuilder.append("\"clickEvent\":{\"action\":\"").append(clickEventAction).append("\",\"value\":\"").append(clickEventValue).append("\"},");
-                    } else {
-                        jsonStringBuilder.append("\"translate\":\"").append(textKey).append("\"},");
+                        jsonStringBuilder.append(",\"clickEvent\":{\"action\":\"")
+                                .append(clickEventAction).append("\",\"value\":\"")
+                                .append(clickEventValue).append("\"}");
                     }
                     HoverEvent hoverEvent = style.getHoverEvent();
                     if(hoverEvent != null){
                         String hoverEventAction = hoverEvent.getAction().getName();
                         JsonObject hoverEventJSON = hoverEvent.serialize();
-                        //System.out.println(hoverEventJSON);
                         JsonObject hoverValue = hoverEventJSON.get("contents").getAsJsonObject();
                         String hoverText = hoverValue.get("text").getAsString();
-                        addCounter();
-                        textKey = HandlerCounter.getPrefix() + ".rich_description" + HandlerCounter.getCounter();
-                        String hoverString = "\"hoverEvent\":{\"action\":\"" + hoverEventAction + "\",\"contents\":{\"translate\":\"" + textKey +"\"}},";
-                        HandlerCounter.transKeys.put(textKey, addPercent(hoverText));
-                        jsonStringBuilder.append(hoverString);
+                        HandlerCounter.addCounter();
+                        String hoverKey = HandlerCounter.getPrefix() + ".rich_description" + HandlerCounter.getCounter();
+                        jsonStringBuilder.append(",\"hoverEvent\":{\"action\":\"")
+                                .append(hoverEventAction).append("\",\"contents\":{\"translate\":\"")
+                                .append(hoverKey).append("\"}}");
+                        HandlerCounter.transKeys.put(hoverKey, addPercent(hoverText));
                     }
-                } else{
+                    jsonStringBuilder.append("},");
+                } else {
                     String textKey = HandlerCounter.getPrefix() + ".rich_description" + HandlerCounter.getCounter();
                     HandlerCounter.transKeys.put(textKey, addPercent(text));
                     jsonStringBuilder.append("{\"translate\":\"").append(textKey).append("\"},");
                 }
             }
+            if(jsonStringBuilder.charAt(jsonStringBuilder.length()-1) == ','){
+                jsonStringBuilder.deleteCharAt(jsonStringBuilder.length()-1);
+            }
+            jsonStringBuilder.append("]");
             jsonString = jsonStringBuilder.toString();
-            jsonString = jsonString.substring(0, jsonString.length()-1);
-            jsonString += "}]";
             return jsonString;
         }catch(Exception e){
             HandlerCounter.log.info(e.getMessage());

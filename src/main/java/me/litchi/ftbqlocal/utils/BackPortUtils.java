@@ -293,7 +293,7 @@ public class BackPortUtils implements FtbQHandler {
             if (desc.isBlank()) {
                 descList.add("");
             } else if(rich_desc_pattern.matcher(desc).find()){
-                Pattern pattern = Pattern.compile("ftbquests\\.chapter\\.[a-zA-Z0-9_]+\\.quest\\d+\\.[a-zA-Z_]+description\\d");
+                Pattern pattern = Pattern.compile("ftbquests\\.chapter\\.[a-zA-Z0-9_]+\\.quest[a-zA-Z0-9_]+\\.[a-zA-Z_]+description\\d");
                 Matcher matcher = pattern.matcher(desc);
                 while (matcher.find()){
                     try {

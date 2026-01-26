@@ -104,7 +104,7 @@ public class Handler implements FtbQHandler {
     public void handleQuests(List<Quest> allQuests) {
         allQuests.forEach(quest ->{
             HandlerCounter.addQuests();
-            HandlerCounter.setPrefix("ftbquests.chapter." + quest.getChapter().getFilename() + ".quest." + quest.id);
+            HandlerCounter.setPrefix("ftbquests.chapter." + quest.getChapter().getFilename() + ".quest" + Long.toHexString(quest.id).toUpperCase());
             String prefix = HandlerCounter.getPrefix();
             if(quest.getTitle() != null){
                 if (!quest.title.isEmpty()){
