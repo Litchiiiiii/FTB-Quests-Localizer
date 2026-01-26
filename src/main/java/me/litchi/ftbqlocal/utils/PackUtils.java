@@ -23,7 +23,7 @@ public class PackUtils {
 
             String zipFileName = outputName;
             JsonObject packObject = generatePackMcmeta(Constants.PackMCMeta.DESCRIPTION, Constants.PackMCMeta.PACKFORMAT);
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
             String jsonOutput = gson.toJson(packObject);
             File packMcMeta = new File(Constants.PackMCMeta.FILEPATH);
             FileUtils.write(packMcMeta, jsonOutput, StandardCharsets.UTF_8);

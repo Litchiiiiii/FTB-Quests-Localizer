@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 @Mod("ftbquestlocalizer")
 public class FtbQuestLocalizerMod{
 	public static final Logger log = LoggerFactory.getLogger(FtbQuestLocalizerMod.class);
-	public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	public static final Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
 	public FtbQuestLocalizerMod(){
 		NeoForge.EVENT_BUS.addListener(ModEvents::onCommandsRegister);
