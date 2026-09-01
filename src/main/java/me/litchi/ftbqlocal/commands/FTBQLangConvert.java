@@ -86,6 +86,6 @@ public class FTBQLangConvert {
     {
         File fe = new File(parent, lang.toLowerCase(Locale.ROOT) + ".json");
         FileUtils.write(fe, FtbQuestLocalizerMod.gson.toJson(HandlerCounter.transKeys), StandardCharsets.UTF_8);
-        PackUtils.createResourcePack(parent, FMLPaths.GAMEDIR.get().toFile()+"\\FTBLang\\FTB-Quests-Localization-Resourcepack.zip");
+        PackUtils.createResourcePack(parent, FMLPaths.GAMEDIR.get().toFile()+File.separator+"FTBLang"+File.separator+"FTB-Quests-Localization-Resourcepack.zip");
     }
 }
