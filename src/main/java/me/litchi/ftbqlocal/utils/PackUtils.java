@@ -30,7 +30,7 @@ public class PackUtils {
 
             try (ZipOutputStream zipOut = new ZipOutputStream(new FileOutputStream(zipFileName))) {
                 for (File listFile : Objects.requireNonNull(file.listFiles())) {
-                    addToZip("assets\\minecraft\\lang\\", listFile, zipOut);
+                    addToZip("assets"+File.separator+"minecraft"+File.separator+"lang"+File.separator, listFile, zipOut);
                 }
                 addToZip("", packMcMeta, zipOut);
 

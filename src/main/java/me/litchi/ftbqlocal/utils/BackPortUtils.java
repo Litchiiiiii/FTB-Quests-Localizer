@@ -26,8 +26,8 @@ import static com.mojang.text2speech.Narrator.LOGGER;
 import static me.litchi.ftbqlocal.commands.FTBQLangConvert.originalLangCode;
 
 public class BackPortUtils implements FtbQHandler {
-    private static final String KUBEJS_LANG_DIR = Constants.PackMCMeta.GAMEDIR+"\\FTBLang\\backup\\"+Constants.PackMCMeta.KUBEJSFOLDER+"\\";
-    private static final String RESOURCE_LANG_DIR = Constants.PackMCMeta.GAMEDIR+"\\resourcepacks\\"+Constants.PackMCMeta.PACKNAME;
+    private static final String KUBEJS_LANG_DIR = Constants.PackMCMeta.GAMEDIR+File.separator+"FTBLang"+File.separator+"backup"+File.separator+Constants.PackMCMeta.KUBEJSFOLDER+File.separator;
+    private static final String RESOURCE_LANG_DIR = Constants.PackMCMeta.GAMEDIR+File.separator+"resourcepacks"+File.separator+Constants.PackMCMeta.PACKNAME;
     private static final Logger log = LoggerFactory.getLogger(BackPortUtils.class);
     private static JsonObject defaultJSON = null;
     private static JsonObject enJson = null;
